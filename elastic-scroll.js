@@ -56,7 +56,7 @@ const createElasticScroll = (el, options) => {
     if (!isAtTop && !isAtBottom) {
       innerWrap.removeEventListener('transitionend', onBounceAwayTransitionEnd)
       innerWrap.removeEventListener('transitionend', onBounceBackTransitionEnd)
-      innerWrap.style.transition = 'none'
+      innerWrap.style.transition = 'all 0s'
       innerWrap.style.transform = 'translate3d(0, 0, 0)'
       isTransitioning = false
     }
