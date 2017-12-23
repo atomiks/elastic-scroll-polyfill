@@ -1,7 +1,9 @@
 # elasticScroll
 Browsers like Chrome and Firefox on macOS don't have elastic scrolling on scrollable divs currently. The goal of this library is to replicate macOS native elastic scrolling when hitting the top and bottom of a scrollable element.
 
-## Usage:
+It uses an inner wrapper and transitions the `translate3d` property, using the `event.deltaY` value to specify the translation intensity in order to replicate the effect.
+
+## Usage
 ```html
 <div class="overflow" data-elastic> ... </div>
 <script>elasticScroll()</script>
@@ -38,4 +40,4 @@ https://codepen.io/anon/pen/LebYvR
 
 ## Browser support
 
-Browsers that support `wheel` and unprefixed CSS transitions
+Browsers that support the `wheel` event and unprefixed CSS transitions.
