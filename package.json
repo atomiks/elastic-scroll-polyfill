@@ -1,8 +1,8 @@
 {
-  "name": "elastic-scroll",
-  "version": "0.0.1",
+  "name": "elasticscroll.js",
+  "version": "0.0.0",
   "description": "Use macOS native elastic scrolling on a scrollable element",
-  "main": "elastic-scroll.js",
+  "main": "dist/elasticscroll.js",
   "scripts": {
     "build": "rollup -c build.js"
   },

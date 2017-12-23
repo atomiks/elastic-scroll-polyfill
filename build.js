@@ -2,9 +2,9 @@ import babel from 'rollup-plugin-babel'
 import minify from 'rollup-plugin-babel-minify'
 
 export default {
-  input: './elastic-scroll.js',
+  input: './elasticscroll.js',
   output: {
-    file: './dist/elastic-scroll.js',
+    file: './dist/elasticscroll.js',
     format: 'umd'
   },
   name: 'elasticScroll',
