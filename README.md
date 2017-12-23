@@ -1,5 +1,5 @@
 # elasticScroll
-Replicates macOS native elastic scrolling when hitting the top and bottom of a scrollable element.
+Browsers like Chrome and Firefox on macOS don't have elastic scrolling on scrollable divs currently. The goal of this library is to replicate macOS native elastic scrolling when hitting the top and bottom of a scrollable element.
 
 ## Usage:
 ```html
@@ -31,3 +31,11 @@ elasticScroll({
   useNative: false
 })
 ```
+
+## Demo
+
+https://codepen.io/anon/pen/LebYvR
+
+## Browser support
+
+Browsers that support `wheel` and unprefixed CSS transitions
