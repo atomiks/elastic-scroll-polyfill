@@ -1,0 +1,19 @@
+{
+  "name": "elastic-scroll",
+  "version": "0.0.1",
+  "description": "Use macOS native elastic scrolling on a scrollable element",
+  "main": "elastic-scroll.js",
+  "scripts": {
+    "build": "rollup -c build.js"
+  },
+  "author": "atomiks",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "rollup": "^0.53.0",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-babel-minify": "^3.1.2"
+  }
+}
