@@ -1,3 +1,7 @@
+document.querySelector('.scroll').innerHTML = 'text '.repeat(500)
+
+
+
 const isBrowser = typeof window !== 'undefined'
 const platform = isBrowser && navigator.platform
 const ua = isBrowser && navigator.userAgent
@@ -21,7 +25,6 @@ const defaults = {
 
 const createInnerWrap = el => {
   const div = document.createElement('div')
-  div.classList = 'scroll-content'
   el.style.willChange = 'transform'
   el.style.backfaceVisibility = 'hidden'
   div.innerHTML = el.innerHTML
@@ -48,24 +51,35 @@ const createElasticScroll = (el, options) => {
   const easing = options.easing
   const innerWrap = createInnerWrap(el)
   let isTransitioning = false
+  let previousScrollTop = 0
   
   const onWheel = e => {
-    const isAtTop = el.scrollTop <= 2
-    const isAtBottom = el.scrollTop + offsetHeight >= scrollHeight - 2
+    const { scrollTop } = el
+    
+    const isAtTop = scrollTop <= 0
+    const isAtBottom = scrollTop + offsetHeight >= scrollHeight
     
     if (!isAtTop && !isAtBottom) {
+      isTransitioning = false
       innerWrap.removeEventListener('transitionend', onBounceAwayTransitionEnd)
       innerWrap.removeEventListener('transitionend', onBounceBackTransitionEnd)
-      innerWrap.style.transition = 'all 0s'
-      innerWrap.style.transform = 'translate3d(0, 0, 0)'
-      isTransitioning = false
+      if (innerWrap.style.transform !== 'translate3d(0px, 0px, 0px)') {
+        innerWrap.style.transition = 'all 0s'
+        innerWrap.style.transform = 'translate3d(0, 0, 0)'
+      }
     }
+    
+    if (scrollTop === previousScrollTop) {
+      // It's transitioning, or they are "stretching" the overflow.
+      // TODO: implement stretching
+      return
+    }
+    
+    previousScrollTop = scrollTop
     
     if ((isAtTop && e.deltaY > 0) || (isAtBottom && e.deltaY < 0)) return
     
-    if (
-      !isTransitioning && (isAtTop || isAtBottom)
-    ) {
+    if (!isTransitioning && (isAtTop || isAtBottom)) {
       isTransitioning = true
       innerWrap.addEventListener('transitionend', onBounceAwayTransitionEnd)
       innerWrap.style.transition = `all ${ options.duration[0] }ms ${ easing }`

@@ -5,9 +5,9 @@ export default {
   input: './elasticscroll.js',
   output: {
     file: './dist/elasticscroll.js',
-    format: 'umd'
+    format: 'umd',
+    name: 'elasticScroll'
   },
-  name: 'elasticScroll',
   externalHelpers: true,
   plugins: [
     babel({
