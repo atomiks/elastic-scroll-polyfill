@@ -3,6 +3,10 @@ Browsers like Chrome and Firefox on macOS don't have elastic scrolling on scroll
 
 It uses an inner wrapper and transitions the `translate3d` property, using the `event.deltaY` value to specify the translation intensity in order to replicate the effect.
 
+## Installation
+
+`npm install elasticscroll.js`
+
 ## Usage
 ```html
 <div class="overflow" data-elastic> ... </div>
@@ -10,6 +14,14 @@ It uses an inner wrapper and transitions the `translate3d` property, using the `
 ```
 
 This will "elastify" every element with a `data-elastic` attribute. Apply it to elements that overflow in the y direction.
+
+Elastified elements have an `_elasticScroll` property.
+
+```js
+const div = document.querySelector('#someScrollableDiv')
+elasticScroll(div)
+div._elasticScroll.disable() // disable the effect
+```
 
 ## Defaults
 
