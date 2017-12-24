@@ -1,7 +1,3 @@
-document.querySelector('.scroll').innerHTML = 'text '.repeat(500)
-
-
-
 const isBrowser = typeof window !== 'undefined'
 const platform = isBrowser && navigator.platform
 const ua = isBrowser && navigator.userAgent
