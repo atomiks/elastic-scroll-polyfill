@@ -5,7 +5,10 @@ It uses an inner wrapper and transitions the `translate3d` property, using the `
 
 ## Installation
 
-`npm install elasticscroll.js`
+```
+npm install elasticscroll.js
+```
+CDN: https://unpkg.com/elasticscroll.js
 
 ## Usage
 ```html
