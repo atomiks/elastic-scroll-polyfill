@@ -31,9 +31,9 @@ div._elasticScroll.disable() // disable the effect
 ```js
 const defaults = {
   targets: '[data-elastic]', // String, Element, NodeList
-  easing: 'cubic-bezier(.14,.38,.25,1)', // CSS transition timing function
-  duration: [100, 800], // [BounceAway, BounceBack] in ms
-  multiplier: 1, // intensity
+  easing: 'cubic-bezier(.23,1,.32,1)', // CSS transition timing function (ease-out-quint)
+  duration: [100, 1000], // [BounceAway, BounceBack] in ms
+  multiplier: 0.9, // intensity
   useNative: true, // use the native implementation if possible, `-webkit-overflow-scrolling` on iOS
   appleDevicesOnly: true // only apply to Apple devices
 }
