@@ -43,7 +43,7 @@ Elastified elements have an `_elasticScroll` property to disable or enable the e
 
 ```js
 const el = document.querySelector('#scrollableElement')
-elasticScroll(el)
+elasticScroll({ targets: el })
 el._elasticScroll.disable()
 el._elasticScroll.enable()
 ```
