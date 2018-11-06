@@ -1,4 +1,4 @@
-# elasticScroll
+# elastic-scroll-polyfill
 
 On macOS and iOS, there is a nice effect when hitting the edge of a document called _elastic_ or _rubber band_ scrolling. This is distinct from momentum or inertial scrolling, and was first demoed at the [original iPhone event back in 2007](https://www.youtube.com/watch?v=vN4U5FqrOdQ&t=16m55s).
 
@@ -23,10 +23,10 @@ https://codepen.io/anon/pen/bQVpdv
 ## Installation
 
 ```
-npm i elastic-scroll
+npm i elastic-scroll-polyfill
 ```
 
-CDN: https://unpkg.com/elastic-scroll
+CDN: https://unpkg.com/elastic-scroll-polyfill
 
 ## Usage
 
