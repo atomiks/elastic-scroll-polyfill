@@ -10,8 +10,8 @@ const isAppleDevice = isIOS || isMac
 const Defaults = {
   targets: '[data-elastic]',
   easing: 'cubic-bezier(.23,1,.32,1)',
-  duration: [100, 1000],
-  intensity: 0.7,
+  duration: [100, 800],
+  intensity: 0.8,
   useNative: true,
   appleDevicesOnly: true
 }
