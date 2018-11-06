@@ -18,7 +18,7 @@ It uses an inner wrapper and transitions the `translate3d` property, using the `
 
 ## Demo
 
-https://codepen.io/anon/pen/LebYvR
+https://codepen.io/anon/pen/bQVpdv
 
 ## Installation
 
