@@ -20,6 +20,8 @@ It uses an inner wrapper and transitions the `translate3d` property, using the `
 
 https://codepen.io/anon/pen/bQVpdv
 
+Note: the effect is disabled on non-Apple devices by default. Pass `{ appleDevicesOnly: false }` as an argument to the function to disable this behavior.
+
 ## Installation
 
 ```
