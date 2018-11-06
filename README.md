@@ -56,7 +56,7 @@ el._elasticScroll.enable()
 {
   targets: '[data-elastic]', // String, Element, NodeList
   easing: 'cubic-bezier(.23,1,.32,1)', // CSS transition timing function (ease-out-quint)
-  duration: [100, 1000], // [BounceAway, BounceBack] in ms
+  duration: [100, 800], // [BounceAway, BounceBack] in ms
   intensity: 0.8, // intensity of the effect (how much it translates the content)
   useNative: true, // use the native implementation if possible, `-webkit-overflow-scrolling` on iOS
   appleDevicesOnly: true // only apply to Apple devices
