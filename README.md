@@ -91,7 +91,7 @@ In order to prevent reconciliation problems created by the inner wrapper, you'll
 
 Here's a component example:
 
-```js
+```jsx
 import React, { Children, cloneElement, createRef } from 'react'
 
 class ElasticScroll extends Component {
