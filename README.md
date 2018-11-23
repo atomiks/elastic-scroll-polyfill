@@ -39,16 +39,21 @@ CDN: https://unpkg.com/elastic-scroll-polyfill
 <script>elasticScroll()</script>
 ```
 
-Calling `elasticScroll()` will apply the elastic scroll effect to all elements with a `data-elastic` attribute by default. Both `x` and `y` overflow receives the effect. You can pass in a single `Element` or `NodeList` as well.
-
-Elastified elements have an `_elasticScroll` property to disable or enable the effect.
+Calling `elasticScroll()` without arguments will apply the elastic scroll effect to all elements on the document with a `data-elastic` attribute by default. Both `x` and `y` overflow receive the effect. You can pass in a single `Element` or `NodeList` as well.
 
 ```js
-const el = document.querySelector('#scrollableElement')
-elasticScroll({ targets: el })
-el._elasticScroll.disable()
-el._elasticScroll.enable()
+const singleElement = document.querySelector('#scrollableElement')
+const instance = elasticScroll({ targets: singleElement }) // Object
+
+// Methods to disable/enable the effect
+instance.disable()
+instance.enable()
+
+const multipleElements = document.querySelectorAll('.scrollableElements')
+const instances = elasticScroll({ targets: multipleElements }) // Array
 ```
+
+Elastified elements also have an `_elasticScroll` property.
 
 ## Options
 
@@ -67,7 +72,7 @@ Example:
 
 ```js
 elasticScroll({
-  targets: document.querySelectorAll('.scrollable-elements'),
+  intensity: 2,
   useNative: false
 })
 ```
@@ -79,3 +84,57 @@ The native implementation offers the ability to "stretch" the overflow when alre
 ## Browser support
 
 Browsers that support the `wheel` event and unprefixed CSS transitions.
+
+## Usage with React and other libraries
+
+In order to prevent reconciliation problems created by the inner wrapper, you'll need to add the inner elastic wrapper div yourself, ensuring it has a `data-elastic-wrapper` attribute.
+
+Here's a component example:
+
+```js
+import React, { Children, cloneElement, createRef } from 'react'
+
+class ElasticScroll extends Component {
+  scroller = createRef()
+
+  componentDidMount() {
+    this.instance = elasticScroll({
+      targets: this.scroller,
+      ...this.props
+    })
+  }
+
+  componentWillUnmount() {
+    this.instance.disable()
+    this.instance = null
+  }
+
+  render() {
+    return Children.map(this.props.children, child =>
+      cloneElement(child, {
+        children: <div data-elastic-wrapper>{child.props.children}</div>,
+        ref: node => {
+          this.scroller = node
+          const { ref } = child
+          if (ref) {
+            if (typeof ref === 'function') {
+              ref(node)
+            } else if (ref.hasOwnProperty('current')) {
+              ref.current = node
+            }
+          }
+        }
+      })
+    )
+  }
+}
+
+// Usage: wrap the parent scroller with the component
+const App = () => (
+  <ElasticScroll>
+    <div style={{ width: '300px', height: '300px', overflowY: 'scroll' }}>
+      Scrollable content in here
+    </div>
+  </ElasticScroll>
+)
+```
