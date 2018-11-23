@@ -92,7 +92,8 @@ In order to prevent reconciliation problems created by the inner wrapper, you'll
 Here's a component example:
 
 ```jsx
-import React, { Children, cloneElement, createRef } from 'react'
+import React, { Component, Children, cloneElement, createRef } from 'react'
+import elasticScroll from 'elastic-scroll-polyfill'
 
 class ElasticScroll extends Component {
   scroller = createRef()
