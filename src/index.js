@@ -16,19 +16,23 @@ const Defaults = {
   appleDevicesOnly: true
 }
 
+const toArray = value => [].slice.call(value)
+
 const createInnerWrap = el => {
   const div = document.createElement('div')
-  div.innerHTML = el.innerHTML
-  el.innerHTML = ''
+  div.setAttribute('data-elastic-wrapper', '')
+  toArray(el.childNodes).forEach(node => {
+    div.appendChild(node)
+  })
   el.appendChild(div)
   return div
 }
 
 const getArrayOfElements = value => {
   if (typeof value === 'string') {
-    return [].slice.call(document.querySelectorAll(value))
+    return toArray(document.querySelectorAll(value))
   } else if (value instanceof NodeList) {
-    return [].slice.call(value)
+    return toArray(value)
   } else if (value instanceof Element) {
     return [value]
   }
@@ -41,7 +45,8 @@ const createElasticScroll = (el, props) => {
     return
   }
 
-  const innerWrap = createInnerWrap(el)
+  const innerWrap =
+    el.querySelector('[data-elastic-wrapper]') || createInnerWrap(el)
   let isTransitioning = false
   let previousScrollTop = 0
   let previousScrollLeft = 0
@@ -160,10 +165,10 @@ const createElasticScroll = (el, props) => {
 
 const elasticScroll = options => {
   const props = { ...Defaults, ...options }
-  const targets = getArrayOfElements(props.targets)
-  return targets
+  const instances = getArrayOfElements(props.targets)
     .map(target => createElasticScroll(target, props))
     .filter(Boolean)
+  return props.targets instanceof Element ? instances[0] : instances
 }
 
 elasticScroll.defaults = Defaults
