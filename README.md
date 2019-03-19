@@ -24,7 +24,7 @@ Note: the effect is disabled on non-Apple devices by default. Pass `{ appleDevic
 
 ## Installation
 
-```
+```bash
 # npm
 npm i elastic-scroll-polyfill
 
@@ -48,7 +48,7 @@ elasticScroll()
 
 Calling `elasticScroll()` without arguments will apply the elastic scroll effect to all elements on the document with a `data-elastic` attribute by default.
 
-## `target` option
+## `targets` option
 
 You can also pass a custom CSS selector string, `HTMLElement` or `NodeList`:
 
