@@ -2,7 +2,7 @@
 
 On macOS and iOS, there is a nice effect when hitting the edge of a document called _elastic_ or _rubber band_ scrolling. This is distinct from momentum or inertial scrolling, and was first demoed at the [original iPhone event back in 2007](https://www.youtube.com/watch?v=vN4U5FqrOdQ&t=16m55s).
 
-- **Elastic scrolling**: When hitting the edge of the document, the boundary of the document will continue to scroll briefly as though it is being "stretched" before settling back down.
+- **Elastic scrolling**: When hitting the edge of a scrolling boundary, the boundary will continue to scroll briefly as though it is being "stretched" before settling back down.
 
 - **Momentum scrolling**: When letting go of the input device (touch or trackpad), the document will continue to scroll while slowing down before coming to rest, as though it has inertia.
 
@@ -25,7 +25,11 @@ Note: the effect is disabled on non-Apple devices by default. Pass `{ appleDevic
 ## Installation
 
 ```
+# npm
 npm i elastic-scroll-polyfill
+
+# Yarn
+yarn add elastic-scroll-polyfill
 ```
 
 CDN: https://unpkg.com/elastic-scroll-polyfill
@@ -36,32 +40,39 @@ CDN: https://unpkg.com/elastic-scroll-polyfill
 <div class="overflow" data-elastic>
   Scrollable content in here
 </div>
-<script>elasticScroll()</script>
 ```
 
-Calling `elasticScroll()` without arguments will apply the elastic scroll effect to all elements on the document with a `data-elastic` attribute by default. Both `x` and `y` overflow receive the effect. You can pass in a single `Element` or `NodeList` as well.
+```js
+elasticScroll()
+```
+
+Calling `elasticScroll()` without arguments will apply the elastic scroll effect to all elements on the document with a `data-elastic` attribute by default.
+
+## `target` option
+
+You can also pass a custom CSS selector string, `HTMLElement` or `NodeList`:
 
 ```js
-const singleElement = document.querySelector('#scrollableElement')
-const instance = elasticScroll({ targets: singleElement }) // Object
+const element = document.querySelector('#scrollableElement')
+const instance = elasticScroll({ targets: element }) // Instance
 
 // Methods to disable/enable the effect
 instance.disable()
 instance.enable()
 
 const multipleElements = document.querySelectorAll('.scrollableElements')
-const instances = elasticScroll({ targets: multipleElements }) // Array
+const instances = elasticScroll({ targets: multipleElements }) // Instance[]
 ```
 
-Elastified elements also have an `_elasticScroll` property.
+Elastified elements have an `_elasticScroll` property pointing to the instance.
 
 ## Options
 
 ```js
 {
-  targets: '[data-elastic]', // String, Element, NodeList
+  targets: '[data-elastic]', // CSS Selector, HTMLElement, NodeList
   easing: 'cubic-bezier(.23,1,.32,1)', // CSS transition timing function (ease-out-quint)
-  duration: [100, 800], // [BounceAway, BounceBack] in ms
+  duration: [90, 750], // [BounceAway, BounceBack] in ms
   intensity: 0.8, // intensity of the effect (how much it translates the content)
   useNative: true, // use the native implementation if possible, `-webkit-overflow-scrolling` on iOS
   appleDevicesOnly: true // only apply to Apple devices
@@ -73,7 +84,7 @@ Example:
 ```js
 elasticScroll({
   intensity: 2,
-  useNative: false
+  useNative: false,
 })
 ```
 
@@ -92,42 +103,37 @@ In order to prevent reconciliation problems created by the inner wrapper, you'll
 Here's a component example:
 
 ```jsx
-import React, { Component, Children, cloneElement, createRef } from 'react'
+import React, { cloneElement, useEffect, useRef } from 'react'
 import elasticScroll from 'elastic-scroll-polyfill'
 
-class ElasticScroll extends Component {
-  scroller = createRef()
+function ElasticScroll({ children, ...props }) {
+  const ref = useRef()
 
-  componentDidMount() {
-    this.instance = elasticScroll({
-      targets: this.scroller,
-      ...this.props
+  useEffect(() => {
+    const instance = elasticScroll({
+      targets: ref.current,
+      ...props,
     })
-  }
 
-  componentWillUnmount() {
-    this.instance.disable()
-    this.instance = null
-  }
+    return () => {
+      instance.disable()
+    }
+  }, [])
 
-  render() {
-    return Children.map(this.props.children, child =>
-      cloneElement(child, {
-        children: <div data-elastic-wrapper>{child.props.children}</div>,
-        ref: node => {
-          this.scroller = node
-          const { ref } = child
-          if (ref) {
-            if (typeof ref === 'function') {
-              ref(node)
-            } else if (ref.hasOwnProperty('current')) {
-              ref.current = node
-            }
-          }
+  return cloneElement(children, {
+    children: <div data-elastic-wrapper>{children.props.children}</div>,
+    ref: node => {
+      ref.current = node
+      const { ref } = children
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(node)
+        } else if (ref.hasOwnProperty('current')) {
+          ref.current = node
         }
-      })
-    )
-  }
+      }
+    },
+  })
 }
 
 // Usage: wrap the parent scroller with the component
