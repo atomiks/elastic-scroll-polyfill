@@ -1,6 +1,6 @@
 {
   "name": "elastic-scroll-polyfill",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "macOS/iOS elastic scroll polyfill on scrollable elements",
   "main": "dist/elasticScroll.js",
   "module": "dist/esm/elasticScroll.js",
