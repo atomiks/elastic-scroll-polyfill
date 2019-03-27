@@ -107,11 +107,11 @@ import React, { cloneElement, useEffect, useRef } from 'react'
 import elasticScroll from 'elastic-scroll-polyfill'
 
 function ElasticScroll({ children, ...props }) {
-  const ref = useRef()
+  const targetRef = useRef()
 
   useEffect(() => {
     const instance = elasticScroll({
-      targets: ref.current,
+      targets: targetRef.current,
       ...props,
     })
 
@@ -123,7 +123,7 @@ function ElasticScroll({ children, ...props }) {
   return cloneElement(children, {
     children: <div data-elastic-wrapper>{children.props.children}</div>,
     ref: node => {
-      ref.current = node
+      targetRef.current = node
       const { ref } = children
       if (ref) {
         if (typeof ref === 'function') {
