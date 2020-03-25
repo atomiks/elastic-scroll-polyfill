@@ -1,0 +1,22 @@
+<style>
+    .scroll {
+        width: 320px;
+        height: 320px;
+        overflow: scroll;
+    }
+</style>
+<div class="scroll" data-elastic>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam saepe atque velit repellat obcaecati sint veritatis nulla maxime, cum reiciendis minima excepturi, adipisci doloribus. Praesentium repudiandae similique laboriosam! Unde, distinctio?
+</div>
+<script src="index.ts"></script>
+<script>
+    const scrollElement = document.querySelector('.scroll');
+    const scrollFunc = () => {
+        // alert('scroll');
+    };
+    scrollElement.addEventListener('scroll', scrollFunc, {passive: true});
+    elasticScroll();
+</script>
+
+<!--  TODO: Edge scrolling -->
+<!--  TODO: Make it work on Android -->

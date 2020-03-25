@@ -13,4 +13,7 @@ function elasticScroll(options?: Options): Instance | Instance[] {
 
 elasticScroll.defaults = defaultProps
 
+// Export to window
+;(<any>window).elasticScroll = elasticScroll
+
 export default elasticScroll

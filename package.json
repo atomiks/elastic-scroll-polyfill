@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "node rollup.build.js",
+    "dev": "parcel src/index.html",
     "check-types": "tsc"
   },
   "author": "atomiks",
@@ -21,6 +22,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-typescript": "^7.3.3",
+    "parcel": "^1.12.4",
     "rollup": "^1.6.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-node-resolve": "^4.0.1",
