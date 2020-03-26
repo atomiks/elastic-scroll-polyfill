@@ -6,7 +6,7 @@ const defaultProps: Props = {
   duration: [90, 750],
   intensity: 0.8,
   useNative: true,
-  appleDevicesOnly: false,
+  appleDevicesOnly: true,
 }
 
 export default defaultProps
