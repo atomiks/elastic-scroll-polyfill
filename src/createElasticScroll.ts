@@ -21,11 +21,20 @@ export default function createElasticScroll(
   let previousScrollLeft = 0
   let scrollDirection: 'x' | 'y' = 'y'
 
-  // For calculating scroll deltas
   let previousX = 0;
   let previousY = 0;
 
   function onScroll(): void {
+    // Create WheelEvent from deltas
+    const { scrollLeft, scrollTop } = el;
+    const deltaX = -(previousX - scrollLeft);
+    const deltaY = -(previousY - scrollTop);
+    const wheelEvent = { deltaX, deltaY } as WheelEvent;
+    // const we = new WheelEvent('WheelEvent', { deltaX, deltaY });
+    onWheel(wheelEvent);
+  }
+
+  function onWheel({ deltaX, deltaY }: WheelEvent): void {
     const {
       offsetHeight,
       offsetWidth,
@@ -34,18 +43,13 @@ export default function createElasticScroll(
       scrollTop,
       scrollLeft,
     } = el
-    // Calculate deltas (multiplied by two to match wheel effect)
-    const deltaX = -((previousX - scrollLeft) * 2)
-    const deltaY = -((previousY - scrollTop) * 2)
-    previousX = scrollLeft
-    previousY = scrollTop
 
     if (previousScrollTop !== scrollTop) {
       scrollDirection = 'y'
     } else if (previousScrollLeft !== scrollLeft) {
       scrollDirection = 'x'
     }
-    
+
     const isAtTop = scrollTop <= 0
     const isAtBottom = scrollTop + offsetHeight >= scrollHeight
     const isAtLeft = scrollLeft <= 0
@@ -119,15 +123,25 @@ export default function createElasticScroll(
     if (props.useNative && hasNativeSupport) {
       el.style.webkitOverflowScrolling = 'touch'
     } else if (!props.useNative || !hasNativeSupport) {
-      el.addEventListener('scroll', onScroll, { passive: true })
+      if (isAppleDevice) {
+        el.addEventListener('wheel', onWheel, { passive: true })
+      } else {
+        el.addEventListener('scroll', onScroll, { passive: true })
+      }
     }
   }
 
   function disable(): void {
     el.style.webkitOverflowScrolling = ''
-    el.removeEventListener('scroll', onScroll, {
-      passive: true,
-    } as AddEventListenerOptions)
+    if (isAppleDevice) {
+      el.removeEventListener('wheel', onWheel, {
+        passive: true,
+      } as AddEventListenerOptions)
+    } else {
+      el.removeEventListener('scroll', onScroll, {
+        passive: true,
+      } as AddEventListenerOptions)
+    }
   }
 
   enable()
