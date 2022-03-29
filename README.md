@@ -18,7 +18,7 @@ It uses an inner wrapper and transitions the `translate3d` property, using the `
 
 ## Demo
 
-https://codepen.io/anon/pen/bQVpdv
+https://codepen.io/atomiks/pen/XWVgYva
 
 Note: the effect is disabled on non-Apple devices by default. Pass `{ appleDevicesOnly: false }` as an argument to the function to disable this behavior.
 
