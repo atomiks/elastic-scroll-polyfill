@@ -1,5 +1,9 @@
 # elastic-scroll-polyfill
 
+## 🚨 Chrome 145+ now supports this natively. Firefox also added support several years ago too. This repo has been archived.
+
+---
+
 On macOS and iOS, there is a nice effect when hitting the edge of a document called _elastic_ or _rubber band_ scrolling. This is distinct from momentum or inertial scrolling, and was first demoed at the [original iPhone event back in 2007](https://www.youtube.com/watch?v=vN4U5FqrOdQ&t=16m55s).
 
 - **Elastic scrolling**: When hitting the edge of a scrolling boundary, the boundary will continue to scroll briefly as though it is being "stretched" before settling back down.
