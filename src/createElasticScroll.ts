@@ -21,6 +21,19 @@ export default function createElasticScroll(
   let previousScrollLeft = 0
   let scrollDirection: 'x' | 'y' = 'y'
 
+  let previousX = 0;
+  let previousY = 0;
+
+  function onScroll(): void {
+    // Create WheelEvent from deltas
+    const { scrollLeft, scrollTop } = el;
+    const deltaX = -(previousX - scrollLeft);
+    const deltaY = -(previousY - scrollTop);
+    const wheelEvent = { deltaX, deltaY } as WheelEvent;
+    // const we = new WheelEvent('WheelEvent', { deltaX, deltaY });
+    onWheel(wheelEvent);
+  }
+
   function onWheel({ deltaX, deltaY }: WheelEvent): void {
     const {
       offsetHeight,
@@ -110,15 +123,25 @@ export default function createElasticScroll(
     if (props.useNative && hasNativeSupport) {
       el.style.webkitOverflowScrolling = 'touch'
     } else if (!props.useNative || !hasNativeSupport) {
-      el.addEventListener('wheel', onWheel, { passive: true })
+      if (isAppleDevice) {
+        el.addEventListener('wheel', onWheel, { passive: true })
+      } else {
+        el.addEventListener('scroll', onScroll, { passive: true })
+      }
     }
   }
 
   function disable(): void {
     el.style.webkitOverflowScrolling = ''
-    el.removeEventListener('wheel', onWheel, {
-      passive: true,
-    } as AddEventListenerOptions)
+    if (isAppleDevice) {
+      el.removeEventListener('wheel', onWheel, {
+        passive: true,
+      } as AddEventListenerOptions)
+    } else {
+      el.removeEventListener('scroll', onScroll, {
+        passive: true,
+      } as AddEventListenerOptions)
+    }
   }
 
   enable()
